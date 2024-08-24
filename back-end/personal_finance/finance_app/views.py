@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from rest_framework import permissions
+from .models import Expense
+from .serializers import ExpenseSerializer
 
 def register(request):
     if request.method == 'POST':
@@ -32,3 +36,8 @@ def logout(request):
 @login_required
 def home(request):
     return render(request, 'index.html') 
+
+class ExpenseViewSet(viewsets.ModelViewSet):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
+    permission_classes = [permissions.IsAuthenticated]
