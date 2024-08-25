@@ -7,7 +7,7 @@ import { Budget } from './budget-planner.model';
 providedIn: 'root'
 })
 export class BudgetService {
-  private apiUrl = 'http://localhost:8000/api/budget'; // Replace with your backend API URL
+  private apiUrl = 'http://localhost:8000/api/budgets/'; // Replace with your backend API URL
 
 constructor(private http: HttpClient) { }
 
@@ -20,10 +20,10 @@ addBudget(budget: Budget): Observable<Budget> {
 }
 
 updateBudget(id: number, budget: Budget): Observable<Budget> {
-    return this.http.put<Budget>(`${this.apiUrl}/${id}`, budget);
+    return this.http.put<Budget>(`${this.apiUrl}${id}/`, budget);
 }
 
 deleteBudget(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
 }
 }

@@ -7,7 +7,7 @@ import { Expense } from './expense-tracker.model';
   providedIn: 'root'
 })
 export class ExpenseService {
-  private apiUrl = 'http://localhost:8000/api/expenses'; // Replace with your backend API URL
+  private apiUrl = 'http://localhost:8000/api/expenses/'; // Replace with your backend API URL
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +20,10 @@ export class ExpenseService {
   }
 
   updateExpense(id: number, expense: Expense): Observable<Expense> {
-    return this.http.put<Expense>(`${this.apiUrl}/${id}`, expense);
+    return this.http.put<Expense>(`${this.apiUrl}${id}/`, expense);
   }
 
   deleteExpense(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
   }
 }

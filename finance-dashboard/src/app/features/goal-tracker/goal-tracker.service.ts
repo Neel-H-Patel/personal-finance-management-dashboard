@@ -7,7 +7,7 @@ import { Goal } from './goal-tracker.model';
   providedIn: 'root'
 })
 export class GoalService {
-  private apiUrl = 'http://localhost:8000/api/goals'; // Replace with your backend API URL
+  private apiUrl = 'http://localhost:8000/api/goals/'; // Replace with your backend API URL
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +20,10 @@ export class GoalService {
   }
 
   updateGoal(id: number, goal: Goal): Observable<Goal> {
-    return this.http.put<Goal>(`${this.apiUrl}/${id}`, goal);
+    return this.http.put<Goal>(`${this.apiUrl}${id}/`, goal);
   }
 
   deleteGoal(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
   }
 }
