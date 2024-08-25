@@ -18,9 +18,9 @@ class Expense(models.Model):
 
 class Goal(models.Model):
     title = models.CharField(max_length=100)
-    target_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    current_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    targetAmount = models.DecimalField(max_digits=10, decimal_places=2)
+    currentAmount = models.DecimalField(max_digits=10, decimal_places=2)
     deadline = models.DateField()
 
     def __str__(self):
-        return f"{self.title} - {self.target_amount} by {self.deadline}"
+        return f"{self.title} - {self.targetAmount} by {self.deadline}"
