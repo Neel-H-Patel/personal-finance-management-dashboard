@@ -8,10 +8,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-expense',
   standalone: true,
   templateUrl: './expense-tracker.component.html',
-  styleUrls: ['./expense-tracker.component.css'],
+  styleUrls: ['./expense-tracker.component.scss'],
   imports: [FormsModule, CommonModule]  // Add FormsModule and CommonModule here
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseTrackerComponent implements OnInit {
   expenses: Expense[] = [];
   newExpense: Expense = { description: '', amount: 0, date: '' };
 

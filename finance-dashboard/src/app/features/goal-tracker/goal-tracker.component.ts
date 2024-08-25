@@ -8,10 +8,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-goal',
   standalone: true,
   templateUrl: './goal-tracker.component.html',
-  styleUrls: ['./goal-tracker.component.css'],
+  styleUrls: ['./goal-tracker.component.scss'],
   imports: [FormsModule, CommonModule]  // Add FormsModule and CommonModule here
 })
-export class GoalComponent implements OnInit {
+export class GoalTrackerComponent implements OnInit {
   goals: Goal[] = [];
   newGoal: Goal = { title: '', targetAmount: 0, currentAmount: 0, deadline: '' };
 
