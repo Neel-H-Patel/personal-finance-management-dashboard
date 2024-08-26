@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened>
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="'/budget'">
+          <mat-icon>attach_money</mat-icon>
+          Budget Planner
+        </a>
+        <a mat-list-item [routerLink]="'/expenses'">
+          <mat-icon>credit_card</mat-icon>
+          Expense Tracker
+        </a>
+        <a mat-list-item [routerLink]="'/goals'">
+          <mat-icon>trending_up</mat-icon>
+          Goal Tracker
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        Personal Finance Dashboard
+      </mat-toolbar>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
