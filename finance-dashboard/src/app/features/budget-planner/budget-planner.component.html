@@ -1,47 +1,81 @@
-<div>
-    <h1>Budget Planner</h1>
-    
-    <form (ngSubmit)="addBudget()">
-        <label for="category">Category:</label>
-        <input type="text" id="category" [(ngModel)]="newBudget.category" name="category" required>
+<div class="flex h-screen">
+    <!-- Main Content Area -->
+    <div class="flex-1 flex p-5 space-x-5">
+        <!-- Form Section -->
+        <div class="w-full md:w-1/3">
+            <h1 class="text-2xl font-bold mb-4">Budget Planner</h1>
+            
+            <form (ngSubmit)="addBudget()" class="space-y-4">
+                <div>
+                    <label for="category" class="block text-sm font-medium">Category:</label>
+                    <input
+                        type="text"
+                        id="category"
+                        [(ngModel)]="newBudget.category"
+                        name="category"
+                        required
+                        class="border p-2 w-full"
+                    />
+                </div>
 
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" [(ngModel)]="newBudget.amount" name="amount" required>
+                <div>
+                    <label for="amount" class="block text-sm font-medium">Amount:</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        [(ngModel)]="newBudget.amount"
+                        name="amount"
+                        required
+                        class="border p-2 w-full"
+                    />
+                </div>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" [(ngModel)]="newBudget.date" name="date" required>
+                <div>
+                    <label for="date" class="block text-sm font-medium">Date:</label>
+                    <input
+                        type="date"
+                        id="date"
+                        [(ngModel)]="newBudget.date"
+                        name="date"
+                        required
+                        class="border p-2 w-full"
+                    />
+                </div>
+                
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Budget</button>
+            </form>
+            
+            <div *ngIf="budgets.length" class="mt-4">
+                <h2 class="text-xl font-bold">Current Budgets</h2>
+                <ul class="list-disc pl-5">
+                    <li *ngFor="let budget of budgets" class="flex justify-between items-center">
+                        <span>{{ budget.category }}: {{ budget.amount | currency }} on {{ budget.date }}</span>
+                        <button (click)="deleteBudget(budget.id!)" class="text-red-500">Delete</button>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="!budgets.length" class="mt-4">
+                <p>No budgets available.</p>
+            </div>
+        </div>
         
-        <button type="submit">Add Budget</button>
-    </form>
-    
-    <div *ngIf="budgets.length">
-        <h2>Current Budgets</h2>
-        <ul>
-            <li *ngFor="let budget of budgets">
-                {{ budget.category }}: {{ budget.amount | currency }} on {{ budget.date }}
-                <button (click)="deleteBudget(budget.id!)">Delete</button>
-                <!-- Add edit functionality if needed -->
-            </li>
-        </ul>
-    </div>
-    <div *ngIf="!budgets.length">
-        <p>No budgets available.</p>
-    </div>
-</div>
-<div>
-    <div style="display: block;">
-        <ngx-charts-bar-vertical
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="budgetData"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
-        </ngx-charts-bar-vertical>
+        <!-- Chart Section -->
+        <div class="w-full md:w-2/3">
+            <div class="block">
+                <ngx-charts-bar-vertical
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="budgetData"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel">
+                </ngx-charts-bar-vertical>
+            </div>
+        </div>
     </div>
 </div>
