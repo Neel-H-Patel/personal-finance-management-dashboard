@@ -1,0 +1,42 @@
+.flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f7fafc; /* Tailwind's bg-gray-100 */
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0; /* Tailwind's border-gray-300 */
+    border-radius: 0.25rem;
+  }
+  
+  button {
+    background-color: #48bb78; /* Tailwind's bg-green-500 */
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    width: 100%;
+  }

@@ -1,0 +1,34 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  form {
+    margin-bottom: 1.5rem;
+  
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #4a5568; /* Tailwind's text-gray-700 */
+    }
+  
+    input {
+      border: 1px solid #e2e8f0; /* Tailwind's border-gray-300 */
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      width: 100%;
+    }
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-red-500 {
+    color: #f56565; /* Tailwind's text-red-500 */
+  }

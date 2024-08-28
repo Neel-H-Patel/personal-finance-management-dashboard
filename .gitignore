@@ -1,1 +1,98 @@
+# .gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+db.sqlite3
+*.sqlite3-journal
+*.pyc
+*.pyo
+*.pyd
+
+# Local development environment settings
+.env
+*.local
+*.log
+
+# Django migrations
+**/migrations/
+**/migrations/__pycache__/
+**/migrations/*.py[cod]
+
+# Django static files
+static/
+media/
+
+# Django cache
+**/__pycache__/
+
+# Django secret key files
+secrets.json
+
+# Node modules for Angular
+node_modules/
+
+# Angular build outputs
+dist/
+build/
+tmp/
+out-tsc/
+
+# Angular environment files (if any custom sensitive configs are present)
+src/environments/environment*.ts
+
+# Compiled JavaScript and map files
+*.js
+*.js.map
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and Editor Directories
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python virtual environment
 venv/
+.env/
+*.env
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# MyPy cache
+.mypy_cache/
+
+# Pyre type checker
+.pyre/
+
+# Pyright type checker
+.pyright/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Profiling data
+.prof
+
+# Miscellaneous
+**/config/
