@@ -2,17 +2,31 @@ import { Component, OnInit, signal } from '@angular/core';
 import { BudgetPlannerService } from '../../services/budget-planner.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Color, ScaleType, NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-budget-planner',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule],
   templateUrl: './budget-planner.component.html',
   styleUrls: ['./budget-planner.component.scss']
 })
 export class BudgetPlannerComponent implements OnInit {
   budgets = signal<any[]>([]);
   newBudgetForm: FormGroup;
+  chartData: any[] = [];
+  view: [number, number] = [800, 400]; // Width and height of the chart
+
+  // Options for the chart
+  showLegend: boolean = true;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  colorScheme: Color = {
+    name: 'customScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9800', '#9C27B0']
+  };
 
   constructor(private budgetService: BudgetPlannerService, private fb: FormBuilder) {
     const today = new Date().toISOString().split('T')[0];
@@ -29,8 +43,16 @@ export class BudgetPlannerComponent implements OnInit {
   }
 
   loadBudgets() {
-    this.budgetService.getBudgets().subscribe(budgets => this.budgets.set(budgets));
-    console.log('Budgets loaded:', this.budgets());
+    this.budgetService.getBudgets().subscribe(
+      budgets => {
+        console.log('Budgets loaded:', budgets); // Log loaded budgets
+        this.budgets.set(budgets);
+        this.updateChartData();
+      },
+      error => {
+        console.error('Error loading budgets:', error); // Log any errors
+      }
+    );
   }
 
   addBudget() {
@@ -62,5 +84,24 @@ export class BudgetPlannerComponent implements OnInit {
     } else {
       console.error('Invalid budget ID:', id);  // Log the issue for debugging
     }
+  }
+
+  updateChartData() {
+    const budgetDataByCategory: { [key: string]: number } = {};
+
+    this.budgets().forEach(budget => {
+      const category = budget.name; // Assuming each budget has a 'name' property for the category
+      if (!budgetDataByCategory[category]) {
+        budgetDataByCategory[category] = 0;
+      }
+      budgetDataByCategory[category] += budget.amount;
+    });
+
+    const formattedData = Object.keys(budgetDataByCategory).map(category => ({
+      name: category,
+      value: budgetDataByCategory[category]
+    }));
+
+    this.chartData = formattedData;
   }
 }

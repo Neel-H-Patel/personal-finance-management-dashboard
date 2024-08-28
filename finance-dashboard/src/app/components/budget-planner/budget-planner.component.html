@@ -1,5 +1,17 @@
 <div class="container mx-auto mt-10">
     <h2 class="text-2xl font-bold mb-4">Budget Planner</h2>
+
+    <ngx-charts-pie-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [legend]="showLegend"
+    [labels]="showLabels"
+    [doughnut]="true"
+    [animations]="animations"
+  >
+  </ngx-charts-pie-chart>
+
     <form [formGroup]="newBudgetForm" (ngSubmit)="addBudget()" class="bg-white p-6 rounded shadow-md mb-4">
       <div class="grid grid-cols-2 gap-4">
         <div class="col-span-2 md:col-span-1">
