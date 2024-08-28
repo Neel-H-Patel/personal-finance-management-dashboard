@@ -15,11 +15,12 @@ export class ExpenseTrackerComponent implements OnInit {
   newExpenseForm: FormGroup;
 
   constructor(private expenseService: ExpenseTrackerService, private fb: FormBuilder) {
+    const today = new Date().toISOString().split('T')[0];
     this.newExpenseForm = this.fb.group({
       name: ['', Validators.required],
       amount: [0, Validators.required],
       category: ['', Validators.required],
-      date: ['', Validators.required]
+      date: [today, Validators.required]
     });
   }
 

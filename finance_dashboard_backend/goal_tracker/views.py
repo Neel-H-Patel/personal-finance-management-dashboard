@@ -13,3 +13,11 @@ class GoalListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        
+class GoalRetrieveDestroyView(generics.RetrieveDestroyAPIView):
+    serializer_class = GoalSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Filter goals to only show those belonging to the current user
+        return Goal.objects.filter(user=self.request.user)
