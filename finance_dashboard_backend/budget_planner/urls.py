@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import BudgetListCreateView, BudgetRetrieveDestroyView
+from .views import BudgetListCreateView, BudgetDetailView
 
 urlpatterns = [
-    path('budgets/', BudgetListCreateView.as_view(), name='budget-list-create'),
-    path('budgets/<int:pk>/', BudgetRetrieveDestroyView.as_view(), name='budget-detail-delete'),  # URL for delete
+    path('', BudgetListCreateView.as_view(), name='budget-list-create'),  # List and create budgets
+    path('<int:pk>/', BudgetDetailView.as_view(), name='budget-detail'),  # Retrieve, update, delete specific budget
 ]

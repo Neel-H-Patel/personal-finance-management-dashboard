@@ -1,8 +1,7 @@
-
 from django.urls import path
-from .views import GoalListCreateView, GoalRetrieveDestroyView
+from .views import GoalListCreateView, GoalDetailView
 
 urlpatterns = [
-    path('goals/', GoalListCreateView.as_view(), name='goal-list-create'),
-    path('goals/<int:pk>/', GoalRetrieveDestroyView.as_view(), name='goal-detail-delete'),  # URL for retrieve and delete
+    path('', GoalListCreateView.as_view(), name='goal-list-create'),  # List and create goals
+    path('<int:pk>/', GoalDetailView.as_view(), name='goal-detail'),  # Retrieve, update, delete specific goal
 ]
