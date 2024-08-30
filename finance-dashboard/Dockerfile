@@ -12,11 +12,11 @@ RUN npm install
 COPY . .
 
 # Build the Angular app
-RUN npm run build --configuration finance-dashboard
+RUN npm run build -- --configuration=finance-dashboard
 
 # Stage 2: Serve the app using Nginx
 FROM nginx:alpine
 COPY --from=build /app/dist/finance-dashboard /usr/share/nginx/html
-
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
