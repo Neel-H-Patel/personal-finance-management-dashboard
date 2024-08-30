@@ -103,6 +103,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
+    "http://localhost:8000",
+    'http://frontend:80',
 ]
 
 # Default primary key field type

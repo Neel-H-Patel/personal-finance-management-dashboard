@@ -3,3 +3,6 @@ djangorestframework>=3.13
 psycopg2-binary>=2.9
 python-dotenv>=0.19
 djangorestframework-simplejwt>=5.0
+gunicorn
+django-cors-headers
+python-decouple
