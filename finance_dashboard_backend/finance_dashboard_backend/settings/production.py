@@ -11,11 +11,11 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', '<your-production-domain>'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'postgres'),
-        'USER': os.getenv('DB_USER', 'neelpatel3'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'Harshida0615!'),
-        'HOST': os.getenv('DB_HOST', 'postgres'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'postgres',
+        'USER': 'neelpatel3',
+        'PASSWORD': 'Harshida0615!',
+        'HOST': 'finance-dashboard-db.cheg2i2wk0rl.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
