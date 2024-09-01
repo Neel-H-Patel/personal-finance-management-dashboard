@@ -4,6 +4,12 @@ from .base import *
 
 DEBUG = True
 
+# In your Django settings.py
+if DEBUG:
+    # Don't set COOP header
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', '18.224.53.250', 'http://finance-dashboard-alb-259944092.us-east-2.elb.amazonaws.com']
 
 
