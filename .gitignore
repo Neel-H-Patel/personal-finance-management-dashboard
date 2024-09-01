@@ -18,9 +18,9 @@ db.sqlite3
 *.log
 
 # Django migrations
-**/migrations/
+!**/migrations/*.py
 **/migrations/__pycache__/
-**/migrations/*.py[cod]
+
 
 # Django static files
 static/
