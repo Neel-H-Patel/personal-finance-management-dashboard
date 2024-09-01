@@ -36,7 +36,7 @@ secrets.json
 node_modules/
 
 # Angular build outputs
-dist/
+!dist/
 build/
 tmp/
 out-tsc/
