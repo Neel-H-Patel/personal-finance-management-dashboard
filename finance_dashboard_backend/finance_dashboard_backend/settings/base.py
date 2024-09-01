@@ -105,7 +105,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://localhost:8000",
     'http://frontend:80',
-    'myfinancesdashboard.com',
+    'https://myfinancesdashboard.com',
 ]
 
 # Default primary key field type
