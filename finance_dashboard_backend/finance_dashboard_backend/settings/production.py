@@ -2,7 +2,7 @@
 
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', '18.224.53.250', 'http://finance-dashboard-alb-259944092.us-east-2.elb.amazonaws.com']
 
