@@ -15,12 +15,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import connection
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import path, include
 
 def health_check(request):
-    return JsonResponse({'status': 'ok'})
+    # Add logging here to capture the request
+    print(f"Health check accessed: {request.method}, {request.headers}")
+
+    try:
+        # Check database connectivity
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1;")
+            result = cursor.fetchone()
+
+        # If the query succeeds, consider the database connection healthy
+        if result:
+            return JsonResponse({"status": "ok"}, status=200)
+        else:
+            return JsonResponse({"status": "error"}, status=500)
+
+    except Exception as e:
+        # Log the exception and return a 500 status code
+        print(f"Health check failed: {str(e)}")
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
 def redirect_to_login(request):
     return redirect('api/auth/login/')

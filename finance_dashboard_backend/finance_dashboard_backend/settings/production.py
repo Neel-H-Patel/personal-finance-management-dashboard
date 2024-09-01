@@ -4,18 +4,17 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', '<your-production-domain>']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', 'http://finance-dashboard-alb-259944092.us-east-2.elb.amazonaws.com']
 
 
-# Production database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'postgres'),
-        'USER': os.getenv('DB_USER', 'neelpatel3'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'Harshida0615!'),
-        'HOST': os.getenv('DB_HOST', 'postgres'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'postgres-finance-db',
+        'USER': 'neelpatel3',
+        'PASSWORD': 'Harshida0615!',
+        'HOST': 'postgres-finance-db.cheg2i2wk0rl.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
