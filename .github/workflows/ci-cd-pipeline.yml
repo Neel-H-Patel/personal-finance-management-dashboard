@@ -78,8 +78,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          eb init -p python-3.9 Django-api-backend-env --region us-east-2
-          eb deploy
+          eb init -p python-3.9 django-api-backend --region us-east-2
+          eb use Django-api-backend-env
         
       - name: Deploy to S3
         env:
