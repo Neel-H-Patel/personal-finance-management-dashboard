@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', '<your-production-domain>']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', 'http://my-finance-bucket-angular-app.s3-website.us-east-2.amazonaws.com']
 
 
 # Production database configuration

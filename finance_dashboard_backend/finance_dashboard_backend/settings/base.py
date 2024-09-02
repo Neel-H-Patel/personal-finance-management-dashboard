@@ -105,6 +105,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://localhost:8000",
     'http://frontend:80',
+    'http://my-finance-bucket-angular-app.s3-website.us-east-2.amazonaws.com',
 ]
 
 # Default primary key field type
