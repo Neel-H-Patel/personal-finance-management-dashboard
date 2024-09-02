@@ -101,15 +101,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://localhost:8000",
-    'http://frontend:80',
-    'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
-    'https://apifinancedashboard.com',
-    'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com',
-    'https://api.apifinancedashboard.com',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:4200",
+#     "http://localhost:8000",
+#     'http://frontend:80',
+#     'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
+#     'https://apifinancedashboard.com',
+#     'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com',
+#     'https://api.apifinancedashboard.com',
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
