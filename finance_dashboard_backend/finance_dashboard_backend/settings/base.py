@@ -47,7 +47,7 @@ ROOT_URLCONF = 'finance_dashboard_backend.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "https://apifinancedashboard.com",
-    "https://www.apifinancedashboard.com"  # If applicable
+    "https://www.apifinancedashboard.com",  # If applicable
     "http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com",
     "https://api.apifinancedashboard.com",
 ]
