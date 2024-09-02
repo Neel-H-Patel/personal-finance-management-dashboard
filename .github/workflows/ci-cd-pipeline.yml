@@ -63,11 +63,6 @@ jobs:
         run: python manage.py migrate
         working-directory: ./finance_dashboard_backend
 
-      - name: Set up Python for EB CLI
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
       - name: Install EB CLI
         run: |
           python -m pip install --upgrade pip
@@ -82,19 +77,7 @@ jobs:
           eb use Fin-env
           eb deploy --timeout 20
         working-directory: ./finance_dashboard_backend
-      
-      - name: Check Elastic Beanstalk Environment Status
-        run: eb status
-      
-      - name: Get Elastic Beanstalk Logs
-        run: eb logs
 
-
-      - name: List build directory contents for debugging
-        run: |
-          ls -al ./finance-dashboard/dist/
-          ls -al ./finance-dashboard/dist/finance-dashboard/
-        
       - name: Deploy to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
