@@ -1,0 +1,10 @@
+.git/
+.vscode/
+.venv/
+node_modules/
+other-project/
+*.md
+*.txt
+*.log
+*.pyc
+__pycache__/
