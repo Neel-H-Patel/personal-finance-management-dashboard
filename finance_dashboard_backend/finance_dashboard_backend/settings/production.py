@@ -6,7 +6,8 @@ DEBUG = False
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-ALLOWED_HOSTS = ['api.apifinancedashboard.com', 'apifinancedashboard.com']
+ALLOWED_HOSTS = ['api.apifinancedashboard.com', 'apifinancedashboard.com', "http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com",
+    "https://api.apifinancedashboard.com",]
 
 
 # Production database configuration

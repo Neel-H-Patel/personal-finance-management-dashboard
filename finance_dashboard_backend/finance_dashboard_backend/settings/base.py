@@ -48,6 +48,8 @@ ROOT_URLCONF = 'finance_dashboard_backend.urls'
 CORS_ALLOWED_ORIGINS = [
     "https://apifinancedashboard.com",
     "https://www.apifinancedashboard.com"  # If applicable
+    "http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com",
+    "https://api.apifinancedashboard.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -138,6 +140,8 @@ SECURE_SSL_REDIRECT = True
 CSRF_TRUSTED_ORIGINS = [
     'https://apifinancedashboard.com',
     'https://www.apifinancedashboard.com',  # If applicable
+    "http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com",
+    "https://api.apifinancedashboard.com",
 ]
 
 # Default primary key field type
