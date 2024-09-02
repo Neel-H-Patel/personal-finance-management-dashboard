@@ -80,6 +80,7 @@ jobs:
         run: |
           eb init -p python-3.9 fin --region us-east-1
           eb use Fin-env
+          eb deploy
 
       - name: List build directory contents for debugging
         run: |
