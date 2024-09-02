@@ -1,9 +1,8 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment.prod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,14 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${this.apiUrl}login/`, { username, password })
+    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const headers = new HttpHeaders({
+        'X-CSRFToken': csrfToken
+    });
+
+    return this.http.post<any>(`${this.apiUrl}login/`, { username, password }, { headers, withCredentials: true })
       .pipe(map(user => {
-        if (user && user.access) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+        if (user && user.username) {
           this.currentUser.set(user);
         }
         return user;
@@ -30,12 +33,34 @@ export class AuthService {
   }
 
   register(username: string, password: string, email: string) {
-    return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email });
+    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const headers = new HttpHeaders({
+        'X-CSRFToken': csrfToken
+    });
+
+    return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email }, { headers, withCredentials: true });
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUser.set(null);
-    this.router.navigate(['/login']);
+    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const headers = new HttpHeaders({
+        'X-CSRFToken': csrfToken
+    });
+
+    this.http.post<any>(`${this.apiUrl}logout/`, {}, { headers, withCredentials: true })
+      .subscribe(() => {
+        this.currentUser.set(null);
+        this.router.navigate(['/login']);
+      });
+  }
+
+  private getCookie(name: string): string | null {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
   }
 }

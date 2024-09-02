@@ -22,8 +22,6 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'rest_framework',
-    'rest_framework_simplejwt',
-    'corsheaders',
     # 'django_extensions', # Uncomment for debugging tools, if needed
 
     # Your apps
@@ -34,7 +32,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,7 +64,7 @@ WSGI_APPLICATION = 'finance_dashboard_backend.wsgi.application'
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -101,46 +98,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:4200",
-#     "http://localhost:8000",
-#     'http://frontend:80',
-#     'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
-#     'https://apifinancedashboard.com',
-#     'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com',
-#     'https://api.apifinancedashboard.com',
-# ]
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default: stores sessions in the database
+SESSION_COOKIE_SECURE = True  # Ensures cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True     # Ensures CSRF token cookies are only sent over HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'  # Controls cross-site cookie behavior (Lax, Strict, or None)
+CSRF_COOKIE_SAMESITE = 'Lax'
+SECURE_SSL_REDIRECT = True  
 
-CORS_ALLOWED_ORIGINS = [
-    "https://apifinancedashboard.com",
-    "https://www.apifinancedashboard.com"  # Include www if needed
+CSRF_TRUSTED_ORIGINS = [
+    'https://apifinancedashboard.com',
+    'https://www.apifinancedashboard.com',  # If applicable
 ]
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS'
-]
-
-CORS_ALLOW_HEADERS = [
-    'authorization',
-    'content-type',
-    'x-csrf-token',
-    'x-requested-with',
-    'accept',
-    'origin',
-    'user-agent',
-    'x-api-key',
-    'x-client-id',
-]
-
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
