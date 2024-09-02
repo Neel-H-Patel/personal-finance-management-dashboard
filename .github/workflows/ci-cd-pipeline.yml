@@ -82,8 +82,9 @@ jobs:
           eb use Django-api-backend-env
         
       - name: Deploy to S3
+        working-directory: ./finance-dashboard
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync ./finance-dashboard/dist/finance-dashboard s3://my-finance-bucket-angular-app --delete
+          aws s3 sync ./dist/finance-dashboard s3://my-finance-bucket-angular-app --delete
