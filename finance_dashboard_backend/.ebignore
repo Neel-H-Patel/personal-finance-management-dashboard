@@ -1,6 +1,11 @@
 .git/
 .vscode/
 .venv/
+venv/
+static/
+.static/
+.staticfiles/
+oldPy/
 node_modules/
 other-project/
 *.md

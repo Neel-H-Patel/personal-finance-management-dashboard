@@ -16,6 +16,9 @@ db.sqlite3
 .env
 *.local
 *.log
+*.venv/
+oldPy/
+staticfiles/
 
 # Django migrations
 **/migrations/
