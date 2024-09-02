@@ -52,7 +52,7 @@ jobs:
         working-directory: ./finance-dashboard
 
       - name: Build Angular project
-        run: npm run build -- --configuration=production
+        run: npm run build -- --configuration=finance-dashboard
         working-directory: ./finance-dashboard
       
       - name: Collect Django static files
