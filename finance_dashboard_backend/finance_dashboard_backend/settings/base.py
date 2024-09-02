@@ -108,6 +108,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
     'https://apifinancedashboard.com',
     'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com',
+    'https://api.apifinancedashboard.com',
 ]
 
 SECURE_SSL_REDIRECT = True

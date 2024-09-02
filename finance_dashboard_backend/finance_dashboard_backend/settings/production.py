@@ -4,8 +4,9 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', 'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
-    'https://apifinancedashboard.com', 'http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com']
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['api.apifinancedashboard.com', 'apifinancedashboard.com']
 
 
 # Production database configuration
