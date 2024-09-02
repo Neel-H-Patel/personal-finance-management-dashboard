@@ -3,48 +3,77 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - last-try
   pull_request:
+    branches:
+      - last-try
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build Docker image
-        run: docker build -t my-app .
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push Docker image
-        run: docker push your-dockerhub-username/my-app
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Kubernetes
+      - name: Install Python dependencies
         run: |
-          kubectl apply -f k8s/deployment.yaml
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        working-directory: ./finance_dashboard_backend
+
+      - name: Install Node.js dependencies
+        run: npm install
+        working-directory: ./finance-dashboard
+
+      - name: Build Angular project
+        run: npm run build -- --configuration=production
+        working-directory: ./finance-dashboard
+      
+      - name: Collect Django static files
+        run: python manage.py collectstatic --noinput
+        working-directory: ./finance_dashboard_backend
+
+      - name: Apply Django migrations
+        run: python manage.py migrate
+        working-directory: ./finance_dashboard_backend
+      
+      - name: Deploy to Elastic Beanstalk
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          eb init -p python-3.9 Django-api-backend-env --region us-east-2
+          eb deploy
+        
+      - name: Deploy to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 sync ./finance-dashboard/dist/finance-dashboard s3://my-finance-bucket-angular-app --delete
