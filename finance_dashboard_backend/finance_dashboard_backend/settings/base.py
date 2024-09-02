@@ -111,8 +111,32 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #     'https://api.apifinancedashboard.com',
 # ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://apifinancedashboard.com",
+    "https://www.apifinancedashboard.com"  # Include www if needed
+]
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrf-token',
+    'x-requested-with',
+    'accept',
+    'origin',
+    'user-agent',
+    'x-api-key',
+    'x-client-id',
+]
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
