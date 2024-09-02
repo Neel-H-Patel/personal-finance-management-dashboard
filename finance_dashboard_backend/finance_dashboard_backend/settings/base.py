@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'rest_framework',
+    'corsheaders',
     # 'django_extensions', # Uncomment for debugging tools, if needed
 
     # Your apps
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -42,6 +44,34 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'finance_dashboard_backend.urls'
+
+CORS_ALLOWED_ORIGINS = [
+    "https://apifinancedashboard.com",
+    "https://www.apifinancedashboard.com"  # If applicable
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrf-token',
+    'x-requested-with',
+    'accept',
+    'origin',
+    'user-agent',
+    'x-api-key',
+    'x-client-id',
+]
 
 TEMPLATES = [
     {
