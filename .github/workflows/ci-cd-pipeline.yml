@@ -62,6 +62,16 @@ jobs:
       - name: Apply Django migrations
         run: python manage.py migrate
         working-directory: ./finance_dashboard_backend
+
+      - name: Set up Python for EB CLI
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install EB CLI
+        run: |
+          python -m pip install --upgrade pip
+          pip install awsebcli
       
       - name: Deploy to Elastic Beanstalk
         env:
