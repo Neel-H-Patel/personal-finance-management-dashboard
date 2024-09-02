@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://django-api-backend-env.eba-qvyvbzbc.us-east-2.elasticbeanstalk.com/api/', // Adjust the URL to match your backend setup
+    apiUrl: 'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com/api/', // Adjust the URL to match your backend setup
   };

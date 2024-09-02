@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgres://neelpatel3:Harshida0615!@finance-dashboard-db.cheg2i2wk0rl.us-east-2.rds.amazonaws.com:5432/postgres
+      DATABASE_URL: postgres://neelpatel3:Harshida0615!@new-finance-db.cpsqokq8c3xv.us-east-1.rds.amazonaws.com:5432/postgres
     command: ["gunicorn", "--bind", "0.0.0.0:8000", "finance_dashboard_backend.wsgi:application", "--workers", "3", "--timeout", "120"]
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1"]

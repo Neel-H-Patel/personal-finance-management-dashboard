@@ -4,7 +4,8 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', 'http://my-finance-bucket-angular-app.s3-website.us-east-2.amazonaws.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend', 'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
+    'https://apifinancedashboard.com', 'http://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com']
 
 
 # Production database configuration
@@ -14,7 +15,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'neelpatel3',
         'PASSWORD': 'Harshida0615!',
-        'HOST': 'finance-dashboard-db.cheg2i2wk0rl.us-east-2.rds.amazonaws.com',
+        'HOST': 'new-finance-db.cpsqokq8c3xv.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

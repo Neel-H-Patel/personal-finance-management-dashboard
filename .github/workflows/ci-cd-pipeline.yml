@@ -78,8 +78,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          eb init -p python-3.9 django-api-backend --region us-east-2
-          eb use Django-api-backend-env
+          eb init -p python-3.9 fin --region us-east-1
+          eb use Fin-env
 
       - name: List build directory contents for debugging
         run: |
@@ -91,5 +91,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 sync ./finance-dashboard/dist/finance-dashboard s3://my-finance-bucket-angular-app --delete --region us-east-2
+          aws s3 sync ./finance-dashboard/dist/finance-dashboard s3://my-angular-bucket-dashboard --delete --region us-east-1
 

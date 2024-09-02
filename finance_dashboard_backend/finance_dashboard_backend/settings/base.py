@@ -105,29 +105,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://localhost:8000",
     'http://frontend:80',
-    'http://my-finance-bucket-angular-app.s3-website.us-east-2.amazonaws.com',
+    'https://my-angular-bucket-dashboard.s3-website-us-east-1.amazonaws.com',
+    'https://apifinancedashboard.com',
+    'https://fin-env.eba-qwcff6hq.us-east-1.elasticbeanstalk.com',
 ]
 
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
