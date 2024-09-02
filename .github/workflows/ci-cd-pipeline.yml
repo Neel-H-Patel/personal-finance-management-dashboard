@@ -73,15 +73,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install awsebcli
       
+      - name: Check Elastic Beanstalk Environment Status
+        run: eb status
+      
       - name: Deploy to Elastic Beanstalk
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          cd finance_dashboard_backend
           eb init -p python-3.9 fin --region us-east-1
           eb use Fin-env
-          eb deploy
+          eb deploy --timeout 20
+        working-directory: ./finance_dashboard_backend
+      
+      - name: Get Elastic Beanstalk Logs
+        run: eb logs
+
 
       - name: List build directory contents for debugging
         run: |
