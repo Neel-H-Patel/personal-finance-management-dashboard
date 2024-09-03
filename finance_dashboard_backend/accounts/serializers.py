@@ -7,26 +7,33 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ('id', 'username', 'email')
 
+User = get_user_model()
+
 class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
-        model = get_user_model()
-        fields = ('username', 'password', 'email')
-        extra_kwargs = {'password': {'write_only': True}}
+        model = User
+        fields = ('username', 'email', 'password')
 
     def create(self, validated_data):
-        user = get_user_model().objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            email=validated_data['email']
-        )
+        user = User.objects.create_user(**validated_data)
         return user
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField()
+    password = serializers.CharField(write_only=True)
 
     def validate(self, data):
-        user = authenticate(**data)
-        if user and user.is_active:
-            return user
-        raise serializers.ValidationError("Invalid credentials")
+        username = data.get('username')
+        password = data.get('password')
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user is None:
+                raise serializers.ValidationError("Invalid username or password")
+            data['user'] = user
+        else:
+            raise serializers.ValidationError("Must include both username and password")
+
+        return data

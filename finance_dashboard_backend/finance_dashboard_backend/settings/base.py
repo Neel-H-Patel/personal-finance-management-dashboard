@@ -130,11 +130,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default: stores sessions in the database
-SESSION_COOKIE_SECURE = True  # Ensures cookies are only sent over HTTPS
-CSRF_COOKIE_SECURE = True     # Ensures CSRF token cookies are only sent over HTTPS
-SESSION_COOKIE_SAMESITE = 'Lax'  # Controls cross-site cookie behavior (Lax, Strict, or None)
-CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SECURE = True  # Use HTTPS
+CSRF_COOKIE_HTTPONLY = False  # Set to False if you need JavaScript to read the cookie
+CSRF_TRUSTED_ORIGINS = [
+    'https://apifinancedashboard.com',
+    'https://api.apifinancedashboard.com',
+]
+
+SESSION_COOKIE_SECURE = True  # Use HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'  # Adjust as needed (e.g., 'None' for cross-site cookies)
+SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to session cookie
+
 SECURE_SSL_REDIRECT = True  
 
 CSRF_TRUSTED_ORIGINS = [

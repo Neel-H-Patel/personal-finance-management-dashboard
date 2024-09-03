@@ -18,39 +18,51 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const csrfToken = this.getCookie('csrftoken') || '';
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json'
     });
 
     return this.http.post<any>(`${this.apiUrl}login/`, { username, password }, { headers, withCredentials: true })
       .pipe(map(user => {
         if (user && user.username) {
           this.currentUser.set(user);
+          // Optionally, store user details and token in local storage or state management
         }
         return user;
       }));
   }
 
   register(username: string, password: string, email: string) {
-    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const csrfToken = this.getCookie('csrftoken') || '';
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json'
     });
 
-    return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email }, { headers, withCredentials: true });
+    return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email }, { headers, withCredentials: true })
+      .pipe(map(user => {
+        if (user && user.username) {
+          this.currentUser.set(user);
+          // Optionally, store user details and token in local storage or state management
+        }
+        return user;
+      }));
   }
 
   logout() {
-    const csrfToken = this.getCookie('csrftoken') || ''; // Fallback to empty string if null
+    const csrfToken = this.getCookie('csrftoken') || '';
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json'
     });
 
     this.http.post<any>(`${this.apiUrl}logout/`, {}, { headers, withCredentials: true })
       .subscribe(() => {
         this.currentUser.set(null);
         this.router.navigate(['/login']);
+        // Optionally, remove user details from local storage or state management
       });
   }
 
