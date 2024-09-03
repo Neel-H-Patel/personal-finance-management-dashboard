@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private csrfService: CsrfService) {}
 
   ngOnInit() {
-    // // Initialize CSRF token when the app loads
-    // this.csrfService.initCsrfToken();
+    // Initialize CSRF token when the app loads
+    this.csrfService.initCsrfToken();
   }
 
   isLoggedIn(): boolean {
