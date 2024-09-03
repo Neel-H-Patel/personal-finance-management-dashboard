@@ -19,6 +19,5 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Initialize CSRF token when the app loads
     this.csrfService.initCsrfToken();
-    });
   }
 }
