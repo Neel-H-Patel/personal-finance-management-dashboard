@@ -1,3 +1,4 @@
+// expense-tracker.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,18 +13,18 @@ export class ExpenseTrackerService {
   constructor(private http: HttpClient) {}
 
   getExpenses(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl, { withCredentials: true });
   }
 
   addExpense(expense: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, expense);
+    return this.http.post<any>(this.apiUrl, expense, { withCredentials: true });
   }
 
   updateExpense(id: number, expense: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}${id}/`, expense);
+    return this.http.put<any>(`${this.apiUrl}${id}/`, expense, { withCredentials: true });
   }
 
   deleteExpense(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}${id}/`);
+    return this.http.delete<any>(`${this.apiUrl}${id}/`, { withCredentials: true });
   }
 }

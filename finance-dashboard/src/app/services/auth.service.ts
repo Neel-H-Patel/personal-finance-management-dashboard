@@ -1,7 +1,8 @@
-import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment.prod';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -9,42 +10,44 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   private apiUrl = `${environment.apiUrl}auth/`;
-  private currentUser = signal<any>(null);
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.currentUserSubject = new BehaviorSubject<any>(null);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
   getCurrentUser(): any {
-    return this.currentUser();
+    return this.currentUserSubject.value;
   }
 
   login(username: string, password: string) {
-    // No need to set CSRF token here, interceptor handles it
     return this.http.post<any>(`${this.apiUrl}login/`, { username, password }, { withCredentials: true })
       .pipe(map(user => {
         if (user && user.username) {
-          this.currentUser.set(user);
+          this.currentUserSubject.next(user); // Update currentUser
         }
         return user;
       }));
   }
 
   register(username: string, password: string, email: string) {
-    // No need to set CSRF token here, interceptor handles it
     return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email }, { withCredentials: true })
       .pipe(map(user => {
         if (user && user.username) {
-          this.currentUser.set(user);
+          this.currentUserSubject.next(user); // Update currentUser
         }
         return user;
       }));
   }
 
   logout() {
-    // No need to set CSRF token here, interceptor handles it
     this.http.post<any>(`${this.apiUrl}logout/`, {}, { withCredentials: true })
       .subscribe(() => {
-        this.currentUser.set(null);
+        this.currentUserSubject.next(null); // Clear currentUser
         this.router.navigate(['/login']);
       });
   }
 }
+

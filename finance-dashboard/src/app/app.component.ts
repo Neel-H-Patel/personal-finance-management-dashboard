@@ -14,15 +14,17 @@ import { CsrfService } from './services/csrf.service';
 })
 export class AppComponent implements OnInit {
   title = 'finance-dashboard';
+  isLoggedIn = false;
 
   constructor(private authService: AuthService, private csrfService: CsrfService) {}
 
   ngOnInit() {
     // Initialize CSRF token when the app loads
     this.csrfService.initCsrfToken();
-  }
 
-  isLoggedIn(): boolean {
-    return !!this.authService.getCurrentUser(); // Return true if a user is logged in, false otherwise
+    // Subscribe to currentUser to update isLoggedIn dynamically
+    this.authService.currentUser.subscribe(user => {
+      this.isLoggedIn = !!user; // Set to true if user is logged in, false otherwise
+    });
   }
 }
