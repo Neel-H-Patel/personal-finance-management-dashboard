@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CsrfInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log('All cookies:', document.cookie);  // Log all cookies
     const csrfToken = this.getCookie('csrftoken');
     console.log('CSRF Token:', csrfToken); // Add this line to log the token
 
@@ -18,13 +19,9 @@ export class CsrfInterceptor implements HttpInterceptor {
   }
 
   private getCookie(name: string): string | null {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i].trim();
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    console.log(`Cookie ${name} not found`);
-    return null;
-}
+    const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+    const value = match ? decodeURIComponent(match[2]) : null;
+    console.log(`Cookie ${name} value: ${value}`);  // Log the cookie value
+    return value;
+  }
 }
