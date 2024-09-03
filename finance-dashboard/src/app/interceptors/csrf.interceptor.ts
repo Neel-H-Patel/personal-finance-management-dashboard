@@ -6,12 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CsrfInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Retrieve the CSRF token from cookies
     const csrfToken = this.getCookie('csrftoken');
-    
-    // Clone the request to add the CSRF token to the headers
+    console.log('CSRF Token:', csrfToken); // Add this line to log the token
+
     const modifiedReq = req.clone({
-      headers: req.headers.set('X-CSRFToken', csrfToken || ''), // Handle missing token with an empty string
+      headers: req.headers.set('X-CSRFToken', csrfToken || ''),
       withCredentials: true  // Include cookies in the request
     });
 

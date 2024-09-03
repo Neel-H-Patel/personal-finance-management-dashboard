@@ -140,7 +140,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 SESSION_COOKIE_SECURE = True  # Use HTTPS
 SESSION_COOKIE_SAMESITE = 'Lax'  # Adjust as needed (e.g., 'None' for cross-site cookies)
-SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to session cookie
+SESSION_COOKIE_HTTPONLY = False  # Prevent JavaScript access to session cookie
 
 SECURE_SSL_REDIRECT = True  
 
