@@ -18,17 +18,16 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const csrfToken = this.getCookie('csrftoken') || '';
+    const csrfToken = this.getCookie('csrftoken') || ''; // Extract CSRF token from cookie
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken,
-        'Content-Type': 'application/json'
+      'X-CSRFToken': csrfToken,
+      'Content-Type': 'application/json'
     });
 
     return this.http.post<any>(`${this.apiUrl}login/`, { username, password }, { headers, withCredentials: true })
       .pipe(map(user => {
         if (user && user.username) {
           this.currentUser.set(user);
-          // Optionally, store user details and token in local storage or state management
         }
         return user;
       }));
@@ -37,8 +36,8 @@ export class AuthService {
   register(username: string, password: string, email: string) {
     const csrfToken = this.getCookie('csrftoken') || '';
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken,
-        'Content-Type': 'application/json'
+      'X-CSRFToken': csrfToken,
+      'Content-Type': 'application/json'
     });
 
     return this.http.post<any>(`${this.apiUrl}register/`, { username, password, email }, { headers, withCredentials: true })
@@ -54,15 +53,14 @@ export class AuthService {
   logout() {
     const csrfToken = this.getCookie('csrftoken') || '';
     const headers = new HttpHeaders({
-        'X-CSRFToken': csrfToken,
-        'Content-Type': 'application/json'
+      'X-CSRFToken': csrfToken,
+      'Content-Type': 'application/json'
     });
 
     this.http.post<any>(`${this.apiUrl}logout/`, {}, { headers, withCredentials: true })
       .subscribe(() => {
         this.currentUser.set(null);
         this.router.navigate(['/login']);
-        // Optionally, remove user details from local storage or state management
       });
   }
 
