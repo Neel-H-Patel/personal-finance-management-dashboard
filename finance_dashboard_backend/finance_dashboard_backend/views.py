@@ -12,7 +12,7 @@ def set_csrf_token(request):
         csrf_token,
         httponly=False,
         secure=True,
-        samesite='Lax',
+        samesite='None',
         path='/',
         domain='.apifinancedashboard.com'
     )
