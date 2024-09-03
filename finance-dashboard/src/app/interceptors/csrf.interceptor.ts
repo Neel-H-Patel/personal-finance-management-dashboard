@@ -18,7 +18,13 @@ export class CsrfInterceptor implements HttpInterceptor {
   }
 
   private getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
-    return match ? match[2] : null;
-  }
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    console.log(`Cookie ${name} not found`);
+    return null;
+}
 }
