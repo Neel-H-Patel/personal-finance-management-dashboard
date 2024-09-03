@@ -133,6 +133,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CSRF_COOKIE_SECURE = True  # Use HTTPS
 CSRF_COOKIE_HTTPONLY = False  # Set to False if you need JavaScript to read the cookie
 CSRF_COOKIE_SAMESITE = 'None'  # Use 'None' for cross-site requests, 'Lax' for same-site
+CSRF_COOKIE_DOMAIN = '.apifinancedashboard.com'  # Set for all subdomains
 
 CSRF_TRUSTED_ORIGINS = [
     'https://apifinancedashboard.com',
@@ -142,6 +143,7 @@ CSRF_TRUSTED_ORIGINS = [
 SESSION_COOKIE_SECURE = True  # Use HTTPS
 SESSION_COOKIE_SAMESITE = 'None'  # Use 'None' for cross-site requests, 'Lax' for same-site
 SESSION_COOKIE_HTTPONLY = False  # Prevent JavaScript access to session cookie
+SESSION_COOKIE_DOMAIN = '.apifinancedashboard.com'  # Set for all subdomains
 
 SECURE_SSL_REDIRECT = True  
 
