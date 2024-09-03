@@ -22,18 +22,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField()
 
     def validate(self, data):
-        username = data.get('username')
-        password = data.get('password')
-
-        if username and password:
-            user = authenticate(username=username, password=password)
-            if user is None:
-                raise serializers.ValidationError("Invalid username or password")
-            data['user'] = user
-        else:
-            raise serializers.ValidationError("Must include both username and password")
-
-        return data
+        user = authenticate(username=data['username'], password=data['password'])
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Invalid credentials")

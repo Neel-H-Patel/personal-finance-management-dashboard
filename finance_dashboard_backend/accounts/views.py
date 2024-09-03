@@ -37,22 +37,29 @@ class LoginView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        login(request, user)  # Log the user in to create a session
+        if serializer.is_valid():
+            user = serializer.validated_data
 
-        # Generate CSRF token and set it in a cookie
-        csrf_token = csrf.get_token(request)
-        response = Response({
-            'message': 'Login successful',
-            'user': user.username
-        }, status=status.HTTP_200_OK)
-        response.set_cookie(
-            'csrftoken', csrf_token,
-            httponly=False, secure=True, samesite='Lax'
-        )
+            if user:
+                login(request, user)  # Log the user in to create a session
 
-        return response
+                # Generate CSRF token and set it in a cookie
+                csrf_token = csrf.get_token(request)
+                response = Response({
+                    'message': 'Login successful',
+                    'user': user.username
+                }, status=status.HTTP_200_OK)
+                response.set_cookie(
+                    'csrftoken', csrf_token,
+                    httponly=False, secure=True, samesite='Lax'
+                )
+
+                return response
+            else:
+                # User is None or not authenticated, handle this case
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
     def post(self, request):
