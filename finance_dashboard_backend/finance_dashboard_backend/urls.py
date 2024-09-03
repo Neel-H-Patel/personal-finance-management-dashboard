@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import path, include
+from .views import set_csrf_token
 
 def health_check(request):
     return JsonResponse({'status': 'ok'})
@@ -26,6 +27,7 @@ def redirect_to_login(request):
     return redirect('api/auth/login/')
 
 urlpatterns = [
+    path('api/set-csrf-token/', set_csrf_token, name='set-csrf-token'),
     path('', redirect_to_login),
     path('health/', health_check),
     path('admin/', admin.site.urls),
