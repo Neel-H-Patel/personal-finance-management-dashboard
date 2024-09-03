@@ -3,11 +3,12 @@ import { GoalTrackerService } from '../../services/goal-tracker.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-goal-tracker',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule, NavbarComponent],
   templateUrl: './goal-tracker.component.html',
   styleUrls: ['./goal-tracker.component.scss']
 })

@@ -3,11 +3,12 @@ import { ExpenseTrackerService } from '../../services/expense-tracker.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-expense-tracker',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule, NavbarComponent],
   templateUrl: './expense-tracker.component.html',
   styleUrls: ['./expense-tracker.component.scss']
 })

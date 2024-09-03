@@ -3,11 +3,12 @@ import { BudgetPlannerService } from '../../services/budget-planner.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Color, ScaleType, NgxChartsModule } from '@swimlane/ngx-charts';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-budget-planner',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgxChartsModule, NavbarComponent],
   templateUrl: './budget-planner.component.html',
   styleUrls: ['./budget-planner.component.scss']
 })
