@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.middleware.csrf import get_token
 
 
-def initialize_csrf_token(request):
+def set_csrf_token(request):
     # This view simply sets the CSRF token and returns a response
     response = JsonResponse({'detail': 'CSRF token initialized'})
     csrf_token = get_token(request)
