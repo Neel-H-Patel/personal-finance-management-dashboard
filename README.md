@@ -3,6 +3,8 @@
 
 A full-stack finance management dashboard built using **Angular**, **Django**, and **PostgreSQL**. This web app helps users track expenses, plan budgets, and manage financial goals through interactive visualizations and secure user authentication. The project is deployed on AWS with a CI/CD pipeline for seamless updates.
 
+[Visit the Web App](https://apifinancedashboard.com/) 🌐
+
 ![Version](https://img.shields.io/badge/version-1.0-blue)  
 ![Uptime](https://img.shields.io/badge/uptime-99.9%25-brightgreen)  
 ![Users](https://img.shields.io/badge/users-30%2B-blue)
